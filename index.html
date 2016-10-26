@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+	<title>Crystals Collector</title>
+  <!--<link rel="stylesheet" type="text/css" href="assets/css/reset.css"> -->
+
+  
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+	<script src="http://code.jquery.com/jquery.js"></script>
+	
+</head>
+<body>
+   <header>
+        <h2 id ="name">Crystals Collector!</h2>
+   </header>
+   <div class="paragraph">
+        <p>You will be given a random number at the start of the game.</p>
+        <p>There are four crystals below.By clicking on a crystal you will add a specific amount of points to your total score.</p>
+        <p>You win the game by matching your total score to random number,you lose the game if your total score goes above the random number.</p>
+        <p>The value of each crystal is hidden from you untill you click on it</p>
+        <p>Each time when the game starts, the game will change the values of each crystal</p>
+    </div>
+    <div class="start">
+        <div class="total"></div>
+    	
+        <div class="result">
+        	Wins:<div id="wins"></div>
+        	Losses:<div id="losses"></div>
+        </div>
+    </div>
+    <div class="crystals">
+        <img src="https://www.moissaniteco.com/images/alexoval.jpg" class="click" id="red" height="100">
+        
+
+        <img src="https://s3.amazonaws.com/viking_education/web_development/prep_coding/ruby_small.jpg" class="click" id="blue" height="100">
+       
+
+        <img src="https://cdn.shopify.com/s/files/1/1248/7127/files/home-white-south-sea-pearls.jpg?3052928563430187089" class="click" id="green" height="100">
+        
+
+        <img src="http://weknowyourdreams.com/images/diamond/diamond-05.jpg" class = "click" id= yellow height="100">
+      
+
+   </div>
+   <div class="score">
+        <h5>Your total score is:</h5>
+   </div>
+   <div class="addition"></div>
+   <script type="text/javascript" src="assets/javascript/game.js"></script>
+<script type="text/javascript">
+	
+
+
+var wins = 0;
+var losses = 0;
+
+var addition = 0;
+
+var total = Math.floor((Math.random()* 100) + 20);
+
+var red = Math.floor((Math.random()* 10) + 1);
+var blue = Math.floor((Math.random()* 10) + 1);
+var yellow = Math.floor((Math.random()* 10) + 1);
+var green = Math.floor((Math.random()* 10) + 1);
+var audio = new Audio('https://files.slack.com/files-pri/T0J8XK2Q3-F0NHG3FDZ/download/raven.mp3');
+
+var updateAddition = function (){
+	$('.addition').empty();
+	$('.addition').append(addition);
+	$('#wins').empty();
+	$('#wins').append(wins);
+	$('#losses').empty();
+	$('#losses').append(losses);
+}
+
+var restart = function(){
+	addition = 0;
+    total = Math.floor((Math.random()* 100) + 20);
+
+	$('.total').empty();
+	$('.total').append(total);
+
+	red = Math.floor((Math.random()* 10) + 1);
+    blue = Math.floor((Math.random()* 10) + 1);
+    yellow = Math.floor((Math.random()* 10) + 1);
+    green = Math.floor((Math.random()* 10) + 1);
+    
+    updateAddition();
+}
+var logic = function (){
+	if (addition == total) {
+		wins = wins + 1;
+		
+		audio.play();
+		restart();
+	}else if(addition > total){
+		losses = losses + 1;
+		
+		audio.play();
+		restart();
+	}else{
+		updateAddition();
+	}
+}
+$('.total').append(total);
+
+$('.addition').append(addition);
+
+
+$(document).ready(function(){
+	$('#red').click(function(){
+		addition = addition + red;
+		logic();
+
+
+	})
+	$('#blue').click(function(){
+		addition = addition + blue;
+		logic();
+	})
+	$('#yellow').click(function(){
+		addition = addition + yellow;
+		logic();
+	})
+	$('#green').click(function(){
+		addition = addition + green;
+		logic();
+	})
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+</script>
+
+
+
+
+</body>
+</html>
+
+
+
+
+
